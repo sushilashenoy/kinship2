@@ -20,10 +20,10 @@ pedigree <- function(id, dadid, momid, sex, affected, status, relation,
       sex <- sex + 1
     }
     sex <- ifelse(sex < 1 | sex > 4, 3, sex)
-    if(all(sex > 2))
-            stop("Invalid values for 'sex'")
-        else if(mean(sex == 3) > 0.25)
-                warning("More than 25% of the gender values are 'unknown'")
+    # if(all(sex > 2))
+    #         stop("Invalid values for 'sex'")
+    #     else if(mean(sex == 3) > 0.25)
+    #             warning("More than 25% of the gender values are 'unknown'")
     sex <- factor(sex, 1:4, labels = codes)
     if (missing(missid)) {
       if (is.numeric(id)) missid <- 0
@@ -78,12 +78,12 @@ pedigree <- function(id, dadid, momid, sex, affected, status, relation,
     if(sum(nofather & nomother)<2) 
       stop("pedigree must have at least 2 founders\n")
         
-    if(any(sex[findex] != "male")) {
-        who <- unique((id[findex])[sex[findex] != "male"])
-        msg.n <- 1:min(5, length(who))  #Don't list a zillion
-        stop(paste("Id not male, but is a father:", 
-                   paste(who[msg.n], collapse= " ")))
-        }
+    # if(any(sex[findex] != "male")) {
+    #     who <- unique((id[findex])[sex[findex] != "male"])
+    #     msg.n <- 1:min(5, length(who))  #Don't list a zillion
+    #     stop(paste("Id not male, but is a father:", 
+    #                paste(who[msg.n], collapse= " ")))
+    #     }
 
     if (any(findex==0 & !nofather)) {
         who <- dadid[which(findex==0 & !nofather)]
@@ -92,12 +92,12 @@ pedigree <- function(id, dadid, momid, sex, affected, status, relation,
                    paste(who[msg.n], collapse= " ")))
         }
         
-    if(any(sex[mindex] != "female")) {
-        who <- unique((id[mindex])[sex[mindex] != "female"])
-        msg.n <- 1:min(5, length(who))
-        stop(paste("Id not female, but is a mother:", 
-                   paste(who[msg.n], collapse = " ")))
-        }
+    # if(any(sex[mindex] != "female")) {
+    #     who <- unique((id[mindex])[sex[mindex] != "female"])
+    #     msg.n <- 1:min(5, length(who))
+    #     stop(paste("Id not female, but is a mother:", 
+    #                paste(who[msg.n], collapse = " ")))
+    #     }
 
     if (any(mindex==0 & !nomother)) {
         who <- momid[which(mindex==0 & !nomother)]
