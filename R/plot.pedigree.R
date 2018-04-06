@@ -1,7 +1,7 @@
 # Automatically generated from all.nw using noweb
 plot.pedigree <- function(x, id = x$id, status = x$status, 
                           affected = x$affected, 
-                          cex = 1, col = 1,
+                          cex = 1, col = 1, noids=FALSE,
                           symbolsize = 1, branch = 0.6, 
                           packed = TRUE, align = c(1.5,2), width = 8, 
                           density=c(-1, 35,55,25), mar=c(4.1, 1, 4.1, 1),
@@ -227,8 +227,9 @@ plot.pedigree <- function(x, id = x$id, status = x$status,
             drawbox(plist$pos[i,j], i, sex[k], affected[k,],
                     status[k], col[k], polylist, density, angle,
                     boxw, boxh)
-            text(plist$pos[i,j], i + boxh + labh*.7, id[k], cex=cex, 
-               adj=c(.5,1), ...)
+            if ( !noids )
+              text(plist$pos[i,j], i + boxh + labh*.7, id[k], cex=cex, 
+                   adj=c(.5,1), ...)
             }
     }
     maxcol <- ncol(plist$nid)  #all have the same size
